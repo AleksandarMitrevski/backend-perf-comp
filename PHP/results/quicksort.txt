@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.4.34
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /quicksort.php
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   84.898 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      1000000 bytes
+HTML transferred:       0 bytes
+Requests per second:    58.89 [#/sec] (mean)
+Time per request:       1697.957 [ms] (mean)
+Time per request:       16.980 [ms] (mean, across all concurrent requests)
+Transfer rate:          11.50 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    3  11.5      0     206
+Processing:   343 1679 377.0   1702    2724
+Waiting:       85 1677 377.4   1698    2724
+Total:        343 1682 378.4   1706    2724
+
+Percentage of the requests served within a certain time (ms)
+  50%   1706
+  66%   1950
+  75%   2014
+  80%   2055
+  90%   2140
+  95%   2206
+  98%   2288
+  99%   2370
+ 100%   2724 (longest request)

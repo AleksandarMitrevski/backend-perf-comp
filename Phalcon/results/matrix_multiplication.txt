@@ -1,0 +1,44 @@
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.4.34
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /public/index.php?_url=/benchmarking/matrix_multiplication
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   87.056 seconds
+Complete requests:      5000
+Failed requests:        1
+   (Connect: 0, Receive: 0, Length: 1, Exceptions: 0)
+Non-2xx responses:      1
+Total transferred:      1035297 bytes
+HTML transferred:       299 bytes
+Requests per second:    57.43 [#/sec] (mean)
+Time per request:       1741.121 [ms] (mean)
+Time per request:       17.411 [ms] (mean, across all concurrent requests)
+Transfer rate:          11.61 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0       1
+Processing:    66 1696 5496.0    220   65649
+Waiting:       66 1696 5496.0    220   65649
+Total:         66 1696 5496.0    220   65649
+
+Percentage of the requests served within a certain time (ms)
+  50%    220
+  66%    280
+  75%    353
+  80%    399
+  90%   3661
+  95%   9313
+  98%  20586
+  99%  32393
+ 100%  65649 (longest request)

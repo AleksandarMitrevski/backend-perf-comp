@@ -1,0 +1,42 @@
+This is ApacheBench, Version 2.3 <$Revision: 1826891 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        Apache/2.4.34
+Server Hostname:        localhost
+Server Port:            80
+
+Document Path:          /benchmarking/sieve_of_atkin
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   718.146 seconds
+Complete requests:      5000
+Failed requests:        0
+Total transferred:      955000 bytes
+HTML transferred:       0 bytes
+Requests per second:    6.96 [#/sec] (mean)
+Time per request:       14362.927 [ms] (mean)
+Time per request:       143.629 [ms] (mean, across all concurrent requests)
+Transfer rate:          1.30 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.2      0       1
+Processing:   157 14251 1948.6  14082   21238
+Waiting:      146 14251 1948.5  14082   21238
+Total:        157 14252 1948.6  14082   21238
+
+Percentage of the requests served within a certain time (ms)
+  50%  14082
+  66%  14904
+  75%  15468
+  80%  15830
+  90%  16689
+  95%  17405
+  98%  18191
+  99%  18800
+ 100%  21238 (longest request)
