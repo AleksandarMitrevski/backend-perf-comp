@@ -1,8 +1,8 @@
 # Performance Comparison of Web Server Backend Frameworks
 
-This project is an investigation into the comparative performance of some commonly used web server backend frameworks and technologies: ASP.NET Web API, Django, Express.js, Go, Laravel, Phalcon, PHP (no framework), Rails, Spring MVC. To evaluate performance selected algorithms were adapted to and run in a minimal web application built using each framework, time of execution being the criterion of comparison.
+This project investigates the performance of the most popular web server backend frameworks and technologies: ASP.NET Web API, Django, Express.js, Go, Laravel, Phalcon, PHP (no framework), Rails, Spring MVC. To estimate performance selected benchmarking algorithms were adapted to and run in a minimal web application project constructed using each framework, and execution times were measured.
 
-The executed algorithms are representative of three common CPU problem areas:
+The benchamrking algorithms are representative of three common CPU problem areas:
 
 1. Integer arithmetic: a straight-forward unoptimized square matrix multiplication algorithm,
 
@@ -10,15 +10,15 @@ The executed algorithms are representative of three common CPU problem areas:
 
 3. String sorting: quicksort, source: [GeeksforGeeks](https://www.geeksforgeeks.org/quick-sort/).
 
-For each algorithm a referential implementation in C is provided in the 'Other/Algorithms' directory; note: the C implementation of Quicksort compares integers and in that form it is more suitable as referential.
+For each algorithm a referential implementation in C is provided in the 'Other/Algorithms' directory. Note: the C implementation of Quicksort compares integers and in that form it is more suitable for reference.
 
-An argument could be made that since the selected problem areas originate from CPU benchmarking they might not be as approriate for evaluating performance of web server technologies. The main assumption which gives the project solid foundations, that performance on the selected algorithms sufficiently correlates to that on the typical web server work situations, is considered reasonable by the author. Consequent to the algorithm selection is that the results foremost demonstrate the high-performance potential of the frameworks and technologies, subsequently being an account of real-world framework performance to the extent of the implication, this extent being deemed sufficient.
+The underlying assumption is that the performance on these algorithms corresponds sufficiently to performance on the typical web application usages.
 
 ## Execution
 
 ### Procedure
 
-For each framework the algorithms are implemented adhering to its established development conventions to the largest possible extent with no violations to the original structure. The input of each algorithm is generated upfront, in a script or method called 'init', and is stored in [memcached](https://memcached.org/); an external cache store had to be utilized as not all technologies preserve data between requests in memory, consequently cache reads are included in the measurement results. Algorithm output is discarded. All default framework middleware which is redundant in context has been removed. While in general best efforts have been made for each framework to run optimally in a production-like server environment, optimizations requiring extensive familiarity with the respected framework and / or server were not attempted. Details of the execution evironments are listed in the section [Development and server setup](#development-and-server-setup). After the server has been set up, HTTP requests were being repeatedly sent to the each endpoint which executes its corresponding algorithm.
+For each framework the algorithms are adapted adhering to the established development conventions as much as possible without violating their original form. The input of each algorithm is generated upfront, in a script or method called 'init', and is stored in [memcached](https://memcached.org/). An external cache store had to be utilized as not all technologies preserve data between requests in memory. As a consequence, cache reads are included in the measurement results. Algorithm output is discarded. All the default framework middleware that is redundant to the task has been removed. While in general best efforts have been made for each framework to run optimally in a production-like server environment, optimizations requiring extensive familiarity with the specific frameworks and / or underlying server software were not made. Details of the execution evironments are listed in the section [Development and server setup](#development-and-server-setup). After the server has been set up, HTTP requests were being repeatedly sent to each endpoint which executes an algorithm.
 
 ### Measurement
 
@@ -26,21 +26,21 @@ The [ApacheBench](https://httpd.apache.org/docs/2.4/programs/ab.html) tool was u
 
 `ab -n 5000 -c 100 server-endpoint-url > algorithm_name.txt`
 
-Making 5.000 requests to each corresponding URL, issued in batches of 100, constitutes high-load testing; while the mean time per request would likely be lower under lower server load, at least for some algorithm-framework pairs, it is considered unlikely that this difference would invalidate the resulting position of a framework in the comparison results given the alternative conditions.
+Making 5.000 requests to each corresponding URL, issued in batches of 100, constitutes high-load testing. While the mean time per request would likely be lower under lower server load at least for some algorithm-framework pairs, this is not expected to largely affect the comparative performance results.
 
-The evaluation was made on a machine with a quad-core CPU with base frequency of 3.6 GHz and 16 GB of RAM running a Windows 10 Enterprise OS. The tool output can be found in the 'results' subdirectory for each framework directory.
+The evaluation was made on a machine having 4 CPU cores with base frequency of 3.6 GHz and 16 GB of RAM running a Windows 10 Enterprise OS. The tool output can be found in the 'results' subdirectory for each framework directory.
 
 ### Algorithm parameters
 
-The algorithm parameters effective in execution were as follows:
+Effective algorithm execution parameters:
 
-- Matrix multiplication: dimension - 100.
+- Matrix multiplication: matrix dimension - 100.
 
 - Sieve of Atkin: limit - 250.000.
 
 - Quicksort: collection size - 30.000, string length - 100.
 
-The values of the parameters were chosen so that the following constraints are satisfied:
+The values of the parameters were chosen so that the following desired properties hold:
 
 1. most of the request processing time is spent running the algorithm itself as opposed to routing or middleware,
 
@@ -48,15 +48,15 @@ The values of the parameters were chosen so that the following constraints are s
 
 ## Development and server setup
 
-This section lists framework and server version along with other development or environment setup details for each framework in alphabetical order, with the exception of the cache server being given upfront.
+This section lists framework and server version along with other development or environmental setup details for each framework in alphabetical order, with the exception of the cache server which is given upfront.
 
 ### Memcached
 
-Memcached 1.4.5 64-bit server was used in conjunction with every framework in the following manner:
+Memcached 1.4.5 64-bit server was used in the following manner:
 
 `memcached -I 10m`
 
-The size of the maximum value that can be stored is increased from the default 1 MB to 10 MB due to the input data of matrix multiplication and quicksort algorithms being a few megabytes large given the effective parameters.
+The size of the maximum value that can be stored is increased from the default 1 MB to 10 MB due to the input data of matrix multiplication and quicksort algorithms being of few megabytes in size given the effective parameters.
 
 ### ASP.NET Web API
 
@@ -84,7 +84,7 @@ Phalcon 3.4.1. See PHP and server details under PHP. Using mod_fcgid 2.3.9 64-bi
 
 ### PHP
 
-PHP 7.2.9 64-bit Thread Safe VC15, run on server Apache httpd 2.4.34 64-bit VC15. Nginx is the more appropriate choice for PHP server, however the Windows platform eliminated this possibility. The older 'memcache' module is used instead of 'memcached' for cache server communication, again due to the running platform. php.ini and httpd.conf files are provided in 'env-config-files' subdirectory.
+PHP 7.2.9 64-bit Thread Safe VC15, run on server Apache httpd 2.4.34 64-bit VC15. Nginx is the more appropriate choice for PHP server, however performing the experiment on Windows eliminated this possibility. The older 'memcache' module is used instead of 'memcached' for cache server communication, again due to the specific platform that is used. php.ini and httpd.conf files are provided in 'env-config-files' subdirectory.
 
 ### Rails
 
@@ -96,7 +96,7 @@ Apache Tomcat 9.0.12, JRE 10.0.2 64-bit, Spring 5.0.0.RELEASE. Tomcat's memory p
 
 ## Results
 
-The statistics reported from Apache Bench results output are `Time per request (mean)` in milliseconds and `[+/-sd]` over `Mean` for row Total in percentages.
+The statistics reported from Apache Bench were `Time per request (mean)` in milliseconds and `[+/-sd]` over `Mean` for row Total in percentages.
 
 The following table summarizes the results, ordering the frameworks by descending performance, the sum of the means is used to resolve ambiguous cases.
 
@@ -112,11 +112,11 @@ The following table summarizes the results, ordering the frameworks by descendin
 | Rails (puma)               | 27529.518 +/- 61.9%   | 3647.638 +/- 62.9%  | 9887.460 +/- 58.9%  |
 | Django (httpd, mod_wsgi)   | 29128.659 +/- 15.1%   | 14362.927 +/- 13.7% | 11071.213 +/- 12%   |
 
-The Express.js framework was unable to handle the high-load for quicksort algorithm execution and was run sequentially; the mean statistic for this run is adjusted by the effective concurrency level.
+The Express.js framework was unable to handle the high-load for quicksort algorithm execution and had to be run sequentially; the mean statistic for this run is adjusted by the effective concurrency level.
 
-Django and Rails achieve comparatively lower performance on matrix multiplication which is to be expected since the respective implementations preserve the original algorithm structure in cases when this does not result in the preferred and optimal problem solution.
+Django and Rails achieve comparatively lower performance on matrix multiplication which is to be expected since the respective implementations preserve the original algorithm form when this does not result in the preferred and optimal problem solution.
 
-The high standard deviation and few failed requests in Phalcon results are likely a consequence of the high load on mod_fcgid despite its overly-permitting configuration; under default configuration, there are slightly more errors for each algorithm, approximately 5, and the standrad deviation is somewhat smaller, likely due to there being more failed requests.
+The high standard deviation and few failed requests in the results for Phalcon are likely a consequence of the high load on mod_fcgid despite its overly-permitting configuration.
 
 The following chart summarizes the results graphically, separate views of the top 6 and bottom 3 y-axis values are provided to better accentuate these areas of interest.
 
@@ -125,5 +125,3 @@ The following chart summarizes the results graphically, separate views of the to
 ![Top-6 chart](Other/Illustrations/chart-top-6.png)
 
 ![Bottom-3 chart](Other/Illustrations/chart-bottom-3.png)
-
-A potential future improvement of the presentation of the results would be to use a custom D3.js chart for visualization.
