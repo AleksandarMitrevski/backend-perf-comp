@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "express": "^4.16.3",
+    "express": "^4.18.2",
     "chance": "^1.0.16",
     "memcached": "^2.2.2"
   }
